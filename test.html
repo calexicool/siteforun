@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <!-- Остальные мета-теги и стили здесь... -->
+  </head>
+
+  <body>
+    <!-- Остальное содержимое страницы здесь... -->
+
+    <!-- Добавленные элементы HTML для товаров -->
+    <div class="products-container">
+      <div class="product">
+        <img src="assets/images/pr1.png" alt="Manifesto Hand">
+        <h4>Manifesto Hand</h4>
+        <p>Управление протезом происходит с помощью ЭМГ-датчиков, а схват кистью выполняется пятью небольшими мощными электродвигателями</p>
+        <strong class="product-price">Цена: от 550 000 руб</strong>
+        <button class="add-to-cart-button">Добавить в корзину</button>
+      </div>
+
+      <!-- Добавьте аналогичные блоки для других товаров -->
+    </div>
+
+    <!-- Элементы HTML для отображения корзины -->
+    <div class="cart-container">
+      <h2>Корзина</h2>
+      <ul class="cart-list" id="cart-list">
+        <!-- Здесь будут отображаться выбранные товары -->
+      </ul>
+      <div class="cart-total">
+        <strong>Итого: <span id="cart-total-price">0</span> руб</strong>
+      </div>
+    </div>
+
+    <!-- Остальная часть кода остается без изменений -->
+
+    <script>
+      const addToCartButtons = document.querySelectorAll(".add-to-cart-button");
+      const cartList = document.getElementById("cart-list");
+      const cartTotalPrice = document.getElementById("cart-total-price");
+      let totalPrice = 0;
+
+      addToCartButtons.forEach((button) => {
+        button.addEventListener("click", () => {
+          const product = button.parentElement;
+          const name = product.querySelector("h4").textContent;
+          const priceText = product.querySelector(".product-price").textContent;
+          const price = parseFloat(priceText.match(/\d+/)[0]); // Извлекаем цену из текста
+
+          const cartItem = document.createElement("li");
+          cartItem.textContent = `${name} - ${price} руб`;
+          cartList.appendChild(cartItem);
+
+          totalPrice += price;
+          cartTotalPrice.textContent = totalPrice;
+        });
+      });
+    </script>
+  </body>
+</html>
